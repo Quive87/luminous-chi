@@ -1,10 +1,12 @@
 from flask import Flask, jsonify
 from bs4 import BeautifulSoup
 import os
+from flask_cors import CORS
 import requests
 import random
 
 app = Flask(__name__)
+CORS(app)
 
 # List of terms
 terms = [
@@ -32,7 +34,7 @@ def scrape_pfps():
         alt_text = img_tag['alt']
         details_link = item.find('a', class_='h5')['href']
         pfps.append({
-            'image': img_src,
+            'url': img_src,
             'alt': alt_text,
             'details_link': f"{details_link}"
         })
